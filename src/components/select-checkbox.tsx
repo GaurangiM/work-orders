@@ -44,7 +44,7 @@ export default function SingleSelectCheckmarks() {
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
-          value={type}
+          value={''}
           onChange={handleChange}
           input={<OutlinedInput label="Type" />}
           renderValue={(selected) => selected.join(', ')}

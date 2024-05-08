@@ -1,15 +1,33 @@
 import { Button } from "@mui/material";
 import SingleSelectCheckmarks from "./select-checkbox";
-import GroupedSelect from "./multiple-parameters-select";
-import React from "react";
+//import GroupedSelect from "./multiple-parameters-select";
+import { filters } from "../data/filters";
+import { filterSchema } from "../model";
 
-const Filters = () => {
+interface filterProps {
+  onFilter: (value: filterSchema) => void;
+  appliedFilter: string;
+}
+
+const Filters = (props: filterProps) => {
   return (
-    <div>
-      <Button variant="outlined">Open Workbonnen</Button>
-      <Button variant="outlined">Less than 15 km</Button>
-      <SingleSelectCheckmarks />
-      <GroupedSelect/>
+    <div className="filters-panel">
+      {filters.map((filter, index) => {
+        const highlightClass = props.appliedFilter && props.appliedFilter === filter.name  ? 'highlight' : '';
+        return (
+          <div key={index} className="filter" >
+            {filter.operator === 'AskUser' ? (
+              <SingleSelectCheckmarks />
+            ) : (
+              <Button variant="outlined" className={`filter-btn ${highlightClass}`}
+                onClick={() => props.onFilter(filter)}
+              >
+                {filter.name}
+              </Button>
+            )}
+          </div>
+        )
+      })}
     </div>
   );
 };
