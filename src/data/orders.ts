@@ -6,10 +6,7 @@ export const orders = [
     "type": "Installation",
     "startDate": "22-04-2016 13:00:00",
     "endDate": "22-04-2016 14:00:00",
-    "color": {
-      "name": "Green",
-      "value": "#DAF7A6"
-    },
+    "color": "Green",
     "description": "Install new KoelKast SF-123"
   },
   {
@@ -19,10 +16,7 @@ export const orders = [
     "type": "Maintenance",
     "startDate": "22-04-2016 14:00:00",
     "endDate": "22-04-2016 15:00:00",
-    "color": {
-      "name": "Green",
-      "value": "#DAF7A6"
-    },
+    "color": "Green",
     "description": "Check freon on split-system"
   },
   {
@@ -32,10 +26,7 @@ export const orders = [
     "type": "Maintenance",
     "startDate": "23-04-2016 14:00:00",
     "endDate": "23-04-2016 15:00:00",
-    "color": {
-      "name": "Blue",
-      "value": "#69A8F4"
-    },
+    "color": "Blue",
     "description": "Resolve failure in split-system"
   },
   {
@@ -45,10 +36,7 @@ export const orders = [
     "type": "Installation",
     "startDate": "23-04-2016 12:00:00",
     "endDate": "23-04-2016 13:00:00",
-    "color": {
-      "name": "Green",
-      "value": "#DAF7A6"
-    },
+    "color": "Green",
     "description": "Install new KoelKast SF-1234"
   },
   {
@@ -58,10 +46,7 @@ export const orders = [
     "type": "Installation",
     "startDate": "21-04-2016 12:00:00",
     "endDate": "21-04-2016 13:00:00",
-    "color": {
-      "name": "Blue",
-      "value": "#69A8F4"
-    },
+    "color": "Blue",
     "description": "Install new KoelKast SF-12345"
   },
   {
@@ -71,10 +56,7 @@ export const orders = [
     "type": "Installation",
     "startDate": "19-04-2016 12:00:00",
     "endDate": "19-04-2016 13:00:00",
-    "color": {
-      "name": "Red",
-      "value": "#F95C52"
-    },
+    "color": "Red",
     "description": "Resolve failure in split-system"
   },
   {
@@ -84,10 +66,7 @@ export const orders = [
     "type": "Installation",
     "startDate": "25-04-2016 12:00:00",
     "endDate": "25-04-2016 13:00:00",
-    "color": {
-      "name": "Green",
-      "value": "#DAF7A6"
-    },
+    "color": "Green",
     "description": "Resolve failure in split-system"
   },
   {
@@ -97,10 +76,7 @@ export const orders = [
     "type": "Installation",
     "startDate": "23-04-2016 12:00:00",
     "endDate": "23-04-2016 13:00:00",
-    "color": {
-      "name": "Blue",
-      "value": "#69A8F4"
-    },
+    "color": "Blue",
     "description": "Install new KoelKast SF-1234"
   },
   {
@@ -110,10 +86,7 @@ export const orders = [
     "type": "Maintenance",
     "startDate": "22-04-2016 14:00:00",
     "endDate": "22-04-2016 15:00:00",
-    "color": {
-      "name": "Green",
-      "value": "#DAF7A6"
-    },
+    "color": "Green",
     "description": "Check freon on split-system"
   },
   {
@@ -123,10 +96,7 @@ export const orders = [
     "type": "Installation",
     "startDate": "19-04-2016 12:00:00",
     "endDate": "19-04-2016 13:00:00",
-    "color": {
-      "name": "Red",
-      "value": "#F95C52"
-    },
+    "color": "Red",
     "description": "Resolve failure in split-system"
   },
 ];

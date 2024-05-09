@@ -5,7 +5,7 @@ export interface orderSchema {
   type: string;
   startDate: string,
   endDate: string;
-  color: colorSchema;
+  color: string;
   description: string;
 }
 
@@ -13,6 +13,7 @@ export interface singleFilterSchema {
   field: string;
   operator: string;
   value?: string;
+  options?: string [];
 }
 
 export interface colorSchema {
@@ -25,6 +26,7 @@ export interface filterSchema {
   field: string;
   operator: string;
   value?: string;
+  options?: string [];
   logicalOperator: string | null;
   nextFilter?: singleFilterSchema ;
 }

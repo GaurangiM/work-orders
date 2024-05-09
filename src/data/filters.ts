@@ -41,6 +41,9 @@ export const filters =[
     "name": "Type",
     "field": "type",
     "operator": "AskUser",
+    "options": ['Repair',
+    'Maintenance',
+    'Installation'],
     "logicalOperator": null
   },
   // {

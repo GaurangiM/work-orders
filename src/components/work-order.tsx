@@ -9,7 +9,12 @@ const WorkOrder = ({ orders }: workOrderListProps) => {
     <div className="work-order">
       {orders.map((order) => {
         return <div className="card order-card" key={order.id}>
-          <div className="card-header" style= {{backgroundColor: order.color.value}}>
+          <div className="card-header" style={{
+            backgroundColor: order.color === "Green" ?
+              "#DAF7A6"
+              : order.color === "Blue" ? "#69A8F4"
+                : order.color === "Red" ? "#F95C52" : "#E4EDF7"
+          }}>
             <p>{order.name}</p>
             <p>Type: {order.type}</p>
             <p>Status: {order.status}</p>

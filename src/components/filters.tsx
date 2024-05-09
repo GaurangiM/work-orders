@@ -10,14 +10,15 @@ interface filterProps {
 }
 
 const Filters = (props: filterProps) => {
+
   return (
     <div className="filters-panel">
       {filters.map((filter, index) => {
         const highlightClass = props.appliedFilter && props.appliedFilter === filter.name  ? 'highlight' : '';
         return (
           <div key={index} className="filter" >
-            {filter.operator === 'AskUser' ? (
-              <SingleSelectCheckmarks />
+            {filter.operator === 'AskUser' && filter.options ? (
+              <SingleSelectCheckmarks optionsSet={filter.options} filter={filter} onFilter={props.onFilter}/>
             ) : (
               <Button variant="outlined" className={`filter-btn ${highlightClass}`}
                 onClick={() => props.onFilter(filter)}

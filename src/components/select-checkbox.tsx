@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
+import { filterSchema } from '../model';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -18,39 +19,40 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Onderhoud',
-  'Storing',
-  'Installatie'
-];
+interface selectCheckboxProps {
+  optionsSet: string[];
+  onFilter: (newFilter: filterSchema) => void;
+  filter: filterSchema;
+}
 
-export default function SingleSelectCheckmarks() {
-  const [type, setType] = React.useState<string[]>([]);
+export default function SingleSelectCheckmarks(props: selectCheckboxProps) {
+  const [type, setType] = React.useState<string>('');
 
   const handleChange = (event: SelectChangeEvent<typeof type>) => {
-    const {
-      target: { value },
-    } = event;
-    setType(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
+    setType(event.target.value);
+    let newFilter = {
+      ...props.filter,
+      "operator": "=",
+      "value": event.target.value,
+    };
+    console.log(newFilter);
+    props.onFilter(newFilter);
   };
 
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Type</InputLabel>
+        <InputLabel id="demo-multiple-checkbox-label">{props.filter.name.toUpperCase()}</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
-          value={''}
-          onChange={handleChange}
+          value={type}
+          onChange={(e) => handleChange(e)}
           input={<OutlinedInput label="Type" />}
-          renderValue={(selected) => selected.join(', ')}
+          renderValue={(selected) => selected}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
+          {props.optionsSet.map((name) => (
             <MenuItem key={name} value={name}>
               <Checkbox checked={type.indexOf(name) > -1} />
               <ListItemText primary={name} />
