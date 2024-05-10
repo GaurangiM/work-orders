@@ -42,7 +42,9 @@ export default function SingleSelectCheckmarks(props: selectCheckboxProps) {
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-checkbox-label">{props.filter.name.toUpperCase()}</InputLabel>
+        <InputLabel id="demo-multiple-checkbox-label">
+          {props.filter.name.toUpperCase()}
+        </InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"

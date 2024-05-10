@@ -1,13 +1,15 @@
-export const filters =[
+export const filters = [
   {
-    "name": "Open orders",
+    "name": "Open status",
+    "isMultipleInput": { "value": "false", "noOfInputs": null },
     "field": "status",
     "operator": "=",
     "value": "Open",
     "logicalOperator": null
   },
   {
-    "name": "Blue & Open orders",
+    "name": "Blue & Open",
+    "isMultipleInput": { "value": "false", "noOfInputs": null },
     "field": "status",
     "operator": "=",
     "value": "Open",
@@ -19,7 +21,8 @@ export const filters =[
     }
   },
   {
-    "name": "Green | Open orders",
+    "name": "Green | Open",
+    "isMultipleInput": { "value": "false", "noOfInputs": null },
     "field": "status",
     "operator": "=",
     "value": "Open",
@@ -30,24 +33,40 @@ export const filters =[
       "value": "Green"
     }
   },
-  {
-    "name": "Blue orders",
-    "field": "color",
-    "operator": "=",
-    "value": "Blue",
-    "logicalOperator": null
-  },
+  // {
+  //   "name": "Blue orders",
+  //   "isMultipleInput": "false",
+  //   "field": "color",
+  //   "operator": "=",
+  //   "value": "Blue",
+  //   "logicalOperator": null
+  // },
   {
     "name": "Type",
+    "isMultipleInput": { "value": "false", "noOfInputs": null },
     "field": "type",
     "operator": "AskUser",
     "options": ['Repair',
-    'Maintenance',
-    'Installation'],
+      'Maintenance',
+      'Installation'],
     "logicalOperator": null
   },
-  // {
-  //   "field": "startDate",
-  //   "operator": "AskUser"
-  // }
+  {
+    "name": "Multiple filter",
+    "isMultipleInput": { "value": "true", "noOfInputs": 2 },
+    "field": "status",
+    "operator": "AskUser",
+    "options": ['In progress',
+      'Open',
+      'New',
+      'Closed'],
+    "logicalOperator": "OR",
+    "nextFilter": {
+      "field": "type",
+      "operator": "AskUser",
+      "options": ['Repair',
+        'Maintenance',
+        'Installation']
+    }
+  },
 ];

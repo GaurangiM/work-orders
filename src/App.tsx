@@ -14,20 +14,7 @@ function App() {
     let matchedOrders: orderSchema[] = [];
     if (operator === '=') {
       console.log("Single filter w/o input");
-      // switch (field) {
-      //   case `${field}`: matchedOrders = orderList.filter((order: orderSchema) =>
-      //     order.status.toLowerCase() === value?.toLowerCase()
-      //   )
-      //     break;
-      //   case 'color': matchedOrders = orderList.filter((order: orderSchema) =>
-      //     order.color.name.toLowerCase() === value?.toLowerCase()
-      //   )
-      //     break;
-      //   default: matchedOrders = [...orderList]
-      // }
       matchedOrders = orderList.filter((order: orderSchema) =>
-        
-        
         order[`${field}` as keyof orderSchema].toString().toLowerCase() === value?.toLowerCase());
       console.log(matchedOrders);
       setFilterdOrders(matchedOrders);
@@ -74,6 +61,10 @@ function App() {
     }
   }
 
+  const renderAllOrders = () => {
+    setFilterdOrders(allOrders);
+  }
+
   useEffect(() => {
     setOrders(orders);
     setFilterdOrders(orders);
@@ -84,7 +75,13 @@ function App() {
       <header>
         <h1>Work orders overview</h1>
       </header>
-      <Filters onFilter={filterOrders} appliedFilter={appliedFilter} />
+      <Filters 
+      onFilter={filterOrders} 
+      appliedFilter={appliedFilter}
+      resetOrders={renderAllOrders}
+      />
+      
+      
       <WorkOrder orders={filteredOrders} />
     </div>
   );

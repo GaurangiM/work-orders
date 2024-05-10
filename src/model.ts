@@ -21,8 +21,14 @@ export interface colorSchema {
   value: string;
 }
 
+export interface multipleInputSchema {
+  value: string;
+  noOfInputs: number | null;
+}
+
 export interface filterSchema {
   name: string;
+  isMultipleInput: multipleInputSchema;
   field: string;
   operator: string;
   value?: string;
