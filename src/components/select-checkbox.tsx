@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
-import { filterSchema } from '../model';
+import { ChildMethods, filterSchema } from '../model';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -23,10 +23,21 @@ interface selectCheckboxProps {
   optionsSet: string[];
   onFilter: (newFilter: filterSchema) => void;
   filter: filterSchema;
+  forwardedRef: React.Ref<ChildMethods>;
 }
 
-export default function SingleSelectCheckmarks(props: selectCheckboxProps) {
+const SingleSelectCheckmarks = React.forwardRef<HTMLSelectElement, selectCheckboxProps>((props, ref) => {
   const [type, setType] = React.useState<string>('');
+
+  const selectRef = React.useRef<HTMLSelectElement>(null);
+
+  const resetSelect = () => {
+    setType(''); // Reset the value to empty string
+  };
+
+  React.useImperativeHandle(props.forwardedRef, () => ({
+    resetSelect
+  }));
 
   const handleChange = (event: SelectChangeEvent<typeof type>) => {
     setType(event.target.value);
@@ -46,6 +57,7 @@ export default function SingleSelectCheckmarks(props: selectCheckboxProps) {
           {props.filter.name.toUpperCase()}
         </InputLabel>
         <Select
+          ref={selectRef}
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           value={type}
@@ -64,4 +76,6 @@ export default function SingleSelectCheckmarks(props: selectCheckboxProps) {
       </FormControl>
     </div>
   );
-}
+});
+
+export default SingleSelectCheckmarks;

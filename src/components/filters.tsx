@@ -2,8 +2,9 @@ import { Button } from "@mui/material";
 import SingleSelectCheckmarks from "./select-checkbox";
 import GroupedSelect from "./multiple-parameters-select";
 import { filters } from "../data/filters";
-import { filterSchema } from "../model";
+import { ChildMethods, filterSchema } from "../model";
 import { TbRefresh } from "react-icons/tb";
+import { useRef } from "react";
 
 interface filterProps {
   onFilter: (value: filterSchema) => void;
@@ -12,6 +13,16 @@ interface filterProps {
 }
 
 const Filters = (props: filterProps) => {
+  const childRef = useRef<ChildMethods>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const resetChild = () => {
+    if (childRef.current) {
+      childRef.current.resetSelect(); // Reset input value
+    }
+    if (buttonRef.current) {
+      buttonRef.current.classList.remove('highlight'); // Remove the class from the element
+    }
+  };
 
   return (
     <div className="filters-panel">
@@ -31,12 +42,15 @@ const Filters = (props: filterProps) => {
                 <SingleSelectCheckmarks
                   optionsSet={filter.options}
                   filter={filter}
-                  onFilter={props.onFilter} />
+                  onFilter={props.onFilter} 
+                  forwardedRef={childRef}
+                  />
               ) : (
                 <Button
                   variant="outlined"
                   className={`filter-btn ${highlightClass}`}
                   onClick={() => props.onFilter(filter)}
+                  ref={buttonRef}
                 >
                   {filter.name}
                 </Button>
@@ -47,7 +61,10 @@ const Filters = (props: filterProps) => {
       <Button
         variant="outlined"
         className="filter"
-        onClick={props.resetOrders}
+        onClick={()=>{
+          resetChild()
+          props.resetOrders()
+        }}
       >
         <TbRefresh />
       </Button>

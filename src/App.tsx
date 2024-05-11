@@ -13,7 +13,7 @@ function App() {
   const singlefilterOrders = ({ field, operator, value }: singleFilterSchema, orderList: orderSchema[]) => {
     let matchedOrders: orderSchema[] = [];
     if (operator === '=') {
-      console.log("Single filter w/o input");
+      //console.log("Single filter w/o input", field, operator, value );
       matchedOrders = orderList.filter((order: orderSchema) =>
         order[`${field}` as keyof orderSchema].toString().toLowerCase() === value?.toLowerCase());
       console.log(matchedOrders);
@@ -75,13 +75,11 @@ function App() {
       <header>
         <h1>Work orders overview</h1>
       </header>
-      <Filters 
-      onFilter={filterOrders} 
-      appliedFilter={appliedFilter}
-      resetOrders={renderAllOrders}
+      <Filters
+        onFilter={filterOrders}
+        appliedFilter={appliedFilter}
+        resetOrders={renderAllOrders}
       />
-      
-      
       <WorkOrder orders={filteredOrders} />
     </div>
   );

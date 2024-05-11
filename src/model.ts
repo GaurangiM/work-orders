@@ -36,3 +36,7 @@ export interface filterSchema {
   logicalOperator: string | null;
   nextFilter?: singleFilterSchema ;
 }
+
+export interface ChildMethods {
+  resetSelect: () => void;
+}

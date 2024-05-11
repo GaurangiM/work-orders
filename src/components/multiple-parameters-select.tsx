@@ -16,6 +16,7 @@ interface Option {
 
 const GroupedSelect = (props: GroupedSelectProps) => {
   const [dataset, setDataset] = React.useState<Option[]>([]);
+  const multiselectRef = React.createRef<Multiselect>();
   React.useEffect(() => {
     if(props.filters.length > 0 && props.optionSets.length > 0) {
       const combinedArray = props.filters.flatMap((filter, index) =>
@@ -38,7 +39,20 @@ const GroupedSelect = (props: GroupedSelectProps) => {
         // onSearch={function noRefCheck() { }}
         onSelect={function noRefCheck(selectedList, selectedItem) {
           console.log(selectedList, selectedItem);
-
+          let newFilter = selectedList.length === 2 ? {
+            ...props.filter,
+            "field": selectedList[0].cat.toLowerCase(),
+            "operator": "=",
+            "value": selectedList[0].key,
+            "nextFilter": {
+              "field": selectedList[1].cat.toLowerCase(),
+              "operator": "=",
+              "value": selectedList[1].key
+            }
+          }: null;
+          console.log(newFilter);
+          if(newFilter !== null)
+            props.onFilter(newFilter);
          }}
         options={dataset}
         showCheckbox
@@ -55,6 +69,7 @@ const GroupedSelect = (props: GroupedSelectProps) => {
             fontSize: '1.2rem'
           }
         }}
+        ref={multiselectRef}
         selectionLimit={2}
       />
     );
