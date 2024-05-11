@@ -20,12 +20,22 @@ const Filters = (props: filterProps) => {
         return (
           <div key={index} className="filter" >
             {filter.isMultipleInput.value === "true" && filter.nextFilter?.options && filter.options ?
-              <GroupedSelect />
+              <GroupedSelect
+                filter={filter}
+                filters={[`${filter.field}`, `${filter.nextFilter.field}`]}
+                optionSets={[[...filter.options], [...filter.nextFilter.options]]}
+                onFilter={props.onFilter}
+              />
               :
               filter.operator === 'AskUser' && filter.options ? (
-                <SingleSelectCheckmarks optionsSet={filter.options} filter={filter} onFilter={props.onFilter} />
+                <SingleSelectCheckmarks
+                  optionsSet={filter.options}
+                  filter={filter}
+                  onFilter={props.onFilter} />
               ) : (
-                <Button variant="outlined" className={`filter-btn ${highlightClass}`}
+                <Button
+                  variant="outlined"
+                  className={`filter-btn ${highlightClass}`}
                   onClick={() => props.onFilter(filter)}
                 >
                   {filter.name}
@@ -34,10 +44,10 @@ const Filters = (props: filterProps) => {
           </div>
         )
       })}
-      <Button 
-      variant="outlined" 
-      className="filter"
-      onClick={props.resetOrders}
+      <Button
+        variant="outlined"
+        className="filter"
+        onClick={props.resetOrders}
       >
         <TbRefresh />
       </Button>

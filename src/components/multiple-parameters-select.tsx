@@ -4,54 +4,45 @@ import Multiselect from 'multiselect-react-dropdown';
 
 interface GroupedSelectProps {
   filter: filterSchema;
-  filters: singleFilterSchema[];
+  filters: string[];
   optionSets: string[][];
   onFilter: (newFilter: filterSchema) => void;
 }
 
-const GroupedSelect = () => {
+interface Option {
+  cat: string;
+  key: string;
+}
 
-  // map the groupBy field with category column
-  const fields: object = { groupBy: 'category', text: 'vegetable', value: 'id' };
+const GroupedSelect = (props: GroupedSelectProps) => {
+  const [dataset, setDataset] = React.useState<Option[]>([]);
+  React.useEffect(() => {
+    if(props.filters.length > 0 && props.optionSets.length > 0) {
+      const combinedArray = props.filters.flatMap((filter, index) =>
+        props.optionSets[index].map(option => ({ 
+          cat: filter.toUpperCase(),
+          key: option 
+        }))
+      );
+      console.log(combinedArray);
+      setDataset(combinedArray);
+    }
+    
+  }, [props.filters, props.optionSets]);
     return (
       <Multiselect
         displayValue="key"
         groupBy="cat"
         onKeyPressFn={function noRefCheck() { }}
-        onRemove={function noRefCheck() { }}
-        onSearch={function noRefCheck() { }}
-        onSelect={function noRefCheck() { }}
-        options={[
-          {
-            cat: 'Group 1',
-            key: 'Option 1'
-          },
-          {
-            cat: 'Group 1',
-            key: 'Option 2'
-          },
-          {
-            cat: 'Group 1',
-            key: 'Option 3'
-          },
-          {
-            cat: 'Group 2',
-            key: 'Option 4'
-          },
-          {
-            cat: 'Group 2',
-            key: 'Option 5'
-          },
-          {
-            cat: 'Group 2',
-            key: 'Option 6'
-          },
-          {
-            cat: 'Group 2',
-            key: 'Option 7'
-          }
-        ]}
+        // onRemove={function noRefCheck() { }}
+        // onSearch={function noRefCheck() { }}
+        onSelect={function noRefCheck(selectedList, selectedItem) {
+          console.log(selectedList, selectedItem);
+
+         }}
+        options={dataset}
         showCheckbox
+        closeOnSelect
         style={{
           multiselectContainer: {
             width: '25rem',
