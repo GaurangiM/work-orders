@@ -37,6 +37,11 @@ export interface filterSchema {
   nextFilter?: singleFilterSchema ;
 }
 
-export interface ChildMethods {
+export interface selectChildMethods {
   resetSelect: () => void;
+  
+}
+
+export interface multiSelectMethods {
+  resetValues: () => void;
 }

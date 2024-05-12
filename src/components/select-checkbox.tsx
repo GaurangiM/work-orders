@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
-import { ChildMethods, filterSchema } from '../model';
+import { selectChildMethods, filterSchema } from '../model';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -23,7 +23,7 @@ interface selectCheckboxProps {
   optionsSet: string[];
   onFilter: (newFilter: filterSchema) => void;
   filter: filterSchema;
-  forwardedRef: React.Ref<ChildMethods>;
+  forwardedRef: React.Ref<selectChildMethods>;
 }
 
 const SingleSelectCheckmarks = React.forwardRef<HTMLSelectElement, selectCheckboxProps>((props, ref) => {

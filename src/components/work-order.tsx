@@ -4,7 +4,7 @@ interface workOrderListProps {
   orders: orderSchema[];
 }
 
-const WorkOrder = ({ orders }: workOrderListProps) => {
+function WorkOrder ({ orders }: workOrderListProps) {
   return (
     <div className="work-order">
       {orders.map((order) => {

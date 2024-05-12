@@ -19,7 +19,7 @@ function App() {
       console.log(matchedOrders);
       setFilterdOrders(matchedOrders);
     } else {
-      console.log("Single filter with input");
+      //console.log("Single filter with input");
     }
     return matchedOrders;
   }

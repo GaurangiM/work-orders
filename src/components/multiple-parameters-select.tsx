@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { filterSchema, singleFilterSchema } from '../model';
+import { multiSelectMethods, filterSchema, singleFilterSchema } from '../model';
 import Multiselect from 'multiselect-react-dropdown';
 
 interface GroupedSelectProps {
@@ -7,6 +7,7 @@ interface GroupedSelectProps {
   filters: string[];
   optionSets: string[][];
   onFilter: (newFilter: filterSchema) => void;
+  forwardedRef: React.Ref<multiSelectMethods>;
 }
 
 interface Option {
@@ -14,9 +15,19 @@ interface Option {
   key: string;
 }
 
-const GroupedSelect = (props: GroupedSelectProps) => {
+const GroupedSelect = React.forwardRef<Multiselect, GroupedSelectProps>((props, ref) => {
   const [dataset, setDataset] = React.useState<Option[]>([]);
-  const multiselectRef = React.createRef<Multiselect>();
+  const multiselectRef = React.useRef<Multiselect>(null);
+
+  const resetValues = () => {
+    if(multiselectRef.current)
+    multiselectRef.current.resetSelectedValues();
+  }
+  
+  React.useImperativeHandle(props.forwardedRef, () => ({
+    resetValues
+  }));
+
   React.useEffect(() => {
     if(props.filters.length > 0 && props.optionSets.length > 0) {
       const combinedArray = props.filters.flatMap((filter, index) =>
@@ -73,6 +84,6 @@ const GroupedSelect = (props: GroupedSelectProps) => {
         selectionLimit={2}
       />
     );
-  }
+  })
 
 export default GroupedSelect;

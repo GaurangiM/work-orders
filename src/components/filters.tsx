@@ -2,9 +2,10 @@ import { Button } from "@mui/material";
 import SingleSelectCheckmarks from "./select-checkbox";
 import GroupedSelect from "./multiple-parameters-select";
 import { filters } from "../data/filters";
-import { ChildMethods, filterSchema } from "../model";
+import { selectChildMethods, filterSchema, multiSelectMethods } from "../model";
 import { TbRefresh } from "react-icons/tb";
 import { useRef } from "react";
+import Multiselect from "multiselect-react-dropdown";
 
 interface filterProps {
   onFilter: (value: filterSchema) => void;
@@ -13,15 +14,18 @@ interface filterProps {
 }
 
 const Filters = (props: filterProps) => {
-  const childRef = useRef<ChildMethods>(null);
+  const selectChildRef = useRef<selectChildMethods>(null);
+  const multiSelectchildRef = useRef<multiSelectMethods>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const resetChild = () => {
-    if (childRef.current) {
-      childRef.current.resetSelect(); // Reset input value
+    if (selectChildRef.current) {
+      selectChildRef.current.resetSelect(); // Reset input value
     }
     if (buttonRef.current) {
       buttonRef.current.classList.remove('highlight'); // Remove the class from the element
     }
+    if(multiSelectchildRef.current)
+      multiSelectchildRef.current.resetValues();
   };
 
   return (
@@ -36,6 +40,7 @@ const Filters = (props: filterProps) => {
                 filters={[`${filter.field}`, `${filter.nextFilter.field}`]}
                 optionSets={[[...filter.options], [...filter.nextFilter.options]]}
                 onFilter={props.onFilter}
+                forwardedRef={multiSelectchildRef}
               />
               :
               filter.operator === 'AskUser' && filter.options ? (
@@ -43,7 +48,7 @@ const Filters = (props: filterProps) => {
                   optionsSet={filter.options}
                   filter={filter}
                   onFilter={props.onFilter} 
-                  forwardedRef={childRef}
+                  forwardedRef={selectChildRef}
                   />
               ) : (
                 <Button
