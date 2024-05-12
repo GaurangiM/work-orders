@@ -52,7 +52,7 @@ export const filters = [
     "logicalOperator": null
   },
   {
-    "name": "Multiple filter",
+    "name": "Multiple OR filter",
     "isMultipleInput": { "value": "true", "noOfInputs": 2 },
     "field": "status",
     "operator": "AskUser",

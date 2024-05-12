@@ -5,7 +5,6 @@ import { filters } from "../data/filters";
 import { selectChildMethods, filterSchema, multiSelectMethods } from "../model";
 import { TbRefresh } from "react-icons/tb";
 import { useRef } from "react";
-import Multiselect from "multiselect-react-dropdown";
 
 interface filterProps {
   onFilter: (value: filterSchema) => void;
@@ -16,15 +15,19 @@ interface filterProps {
 const Filters = (props: filterProps) => {
   const selectChildRef = useRef<selectChildMethods>(null);
   const multiSelectchildRef = useRef<multiSelectMethods>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const buttonRefs = useRef<HTMLButtonElement[]>([]);
   const resetChild = () => {
     if (selectChildRef.current) {
-      selectChildRef.current.resetSelect(); // Reset input value
+      selectChildRef.current.resetSelect();
     }
-    if (buttonRef.current) {
-      buttonRef.current.classList.remove('highlight'); // Remove the class from the element
+    if (buttonRefs.current) {
+      buttonRefs.current.forEach((buttonRef) => {
+        if (buttonRef) {
+          buttonRef.classList.remove('highlight');
+        }
+      });
     }
-    if(multiSelectchildRef.current)
+    if (multiSelectchildRef.current)
       multiSelectchildRef.current.resetValues();
   };
 
@@ -47,15 +50,15 @@ const Filters = (props: filterProps) => {
                 <SingleSelectCheckmarks
                   optionsSet={filter.options}
                   filter={filter}
-                  onFilter={props.onFilter} 
+                  onFilter={props.onFilter}
                   forwardedRef={selectChildRef}
-                  />
+                />
               ) : (
                 <Button
                   variant="outlined"
                   className={`filter-btn ${highlightClass}`}
                   onClick={() => props.onFilter(filter)}
-                  ref={buttonRef}
+                  ref={(el) => el && buttonRefs.current.push(el)}
                 >
                   {filter.name}
                 </Button>
@@ -66,7 +69,7 @@ const Filters = (props: filterProps) => {
       <Button
         variant="outlined"
         className="filter"
-        onClick={()=>{
+        onClick={() => {
           resetChild()
           props.resetOrders()
         }}

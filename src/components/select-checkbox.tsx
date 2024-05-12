@@ -46,7 +46,6 @@ const SingleSelectCheckmarks = React.forwardRef<HTMLSelectElement, selectCheckbo
       "operator": "=",
       "value": event.target.value,
     };
-    console.log(newFilter);
     props.onFilter(newFilter);
   };
 

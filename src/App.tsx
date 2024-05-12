@@ -13,13 +13,9 @@ function App() {
   const singlefilterOrders = ({ field, operator, value }: singleFilterSchema, orderList: orderSchema[]) => {
     let matchedOrders: orderSchema[] = [];
     if (operator === '=') {
-      //console.log("Single filter w/o input", field, operator, value );
       matchedOrders = orderList.filter((order: orderSchema) =>
         order[`${field}` as keyof orderSchema].toString().toLowerCase() === value?.toLowerCase());
-      console.log(matchedOrders);
       setFilterdOrders(matchedOrders);
-    } else {
-      //console.log("Single filter with input");
     }
     return matchedOrders;
   }
@@ -42,7 +38,6 @@ function App() {
           value: filter.nextFilter.value
         };
       }
-      console.log(firstFilter, secondFilter);
       if (filter.logicalOperator === "AND" && firstFilter && secondFilter) {
         firstResult = singlefilterOrders(firstFilter, allOrders);
         singlefilterOrders(secondFilter, firstResult);
@@ -50,11 +45,8 @@ function App() {
       } else if (filter.logicalOperator === "OR" && firstFilter && secondFilter) {
         firstResult = singlefilterOrders(firstFilter, allOrders);
         secondResult = singlefilterOrders(secondFilter, allOrders);
-        console.log("First result:", firstResult);
-        console.log("Second result:", secondResult);
         const combinedSet: Set<orderSchema> = new Set([...firstResult, ...secondResult]);
         const combinedArray: orderSchema[] = Array.from(combinedSet);
-        console.log("Combined result:", combinedArray);
         setFilterdOrders(combinedArray);
         setAppliedFilter(filter.name);
       }

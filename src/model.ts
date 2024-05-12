@@ -45,3 +45,8 @@ export interface selectChildMethods {
 export interface multiSelectMethods {
   resetValues: () => void;
 }
+
+export interface Option {
+  cat: string;
+  key: string;
+}

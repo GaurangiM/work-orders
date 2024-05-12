@@ -7,7 +7,7 @@
 <h1 align="center">
 	<img width="1440" alt="dynamic-filtering" src="https://github.com/GaurangiM/work-orders/assets/32289626/3f2d188c-7904-4897-8025-b587b04bc548">
 </h1>
-<h3>FieldBuddy is a solution for technicians in the field, replacing the paper-based way of working with a digital workflow.Technicians receive Work Orders (tasks to perform at a location), for example resolving failures in a broken installation.Technicians have an overview of Work Orders and want to filter their Work Orders so they can work as efficient as possible.
+<h3>FieldBuddy is a solution for technicians in the field, replacing the paper-based way of working with a digital workflow. Technicians receive Work Orders (tasks to perform at a location), for example resolving failures in a broken installation. Technicians have an overview of Work Orders and want to filter their Work Orders so they can work as efficient as possible.
 </h3>
 
 ---
@@ -23,7 +23,7 @@
 - React JS
 - Typescript
 - Material UI: this React component library is used to implement `Select` dropdown component
-- REACT MULTISELECT DROPDOWN: this React component is used which provides multi select functionality with various features like selection and grouping
+- React Multiselect dropdown: this React component is used which provides multi select functionality with various features like selection and grouping
 
 ## Technical details
 - Filters are stored in `filters.ts` file under `data` folder
